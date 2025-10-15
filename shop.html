@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoPro | Shop</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <!-- Site CSS (make sure the cart/reco CSS from me is appended in style.css) -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html" class="logo">EcoPro</a>
+        <nav>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a href="cart.html" class="cart-link">
+                        <i class="far fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                </li>
+                <li><a href="login.html" target="_blank">Login</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Banner -->
+    <section id="page-header">
+        <div class="hero-text">
+            <h2>#stayhome</h2>
+            <p>Save more with coupons &amp; up to 50% off!</p>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="product1" class="section-p1">
+        <h2>Featured Products</h2>
+        <p>Summer Collection New Modern Design</p>
+        <h3>Male Section</h3>
+
+        <div class="pro-container">
+            <!-- Product 1 -->
+            <div class="pro">
+                <img src="pro1.png" alt="Tropical Vibe Shirt" loading="lazy" />
+                <div class="des">
+                    <span class="brand">adidas</span>
+                    <h5>Tropical Vibe Shirt</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h4>$78</h4>
+                    <button class="cart add-to-cart" data-id="pro1" data-name="Tropical Vibe Shirt" data-price="78"
+                        data-img="pro1.png" data-qty="1" aria-label="Add Tropical Vibe Shirt to cart">🛒</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="pro">
+                <img src="pro2.png" alt="Palm Whisper Shirt" loading="lazy" />
+                <div class="des">
+                    <span class="brand">Levi's</span>
+                    <h5>Palm Whisper Shirt</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h4>$50</h4>
+                    <button class="cart add-to-cart" data-id="pro2" data-name="Palm Whisper Shirt" data-price="50"
+                        data-img="pro2.png" data-qty="1" aria-label="Add Palm Whisper Shirt to cart">🛒</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="pro">
+                <img src="pro3.png" alt="Rustic Bloom Shirt" loading="lazy" />
+                <div class="des">
+                    <span class="brand">Lacoste</span>
+                    <h5>Rustic Bloom Shirt</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h4>$20</h4>
+                    <button class="cart add-to-cart" data-id="pro3" data-name="Rustic Bloom Shirt" data-price="20"
+                        data-img="pro3.png" data-qty="1" aria-label="Add Rustic Bloom Shirt to cart">🛒</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="pro">
+                <img src="pro4.png" alt="Cherry Mist Shirt" loading="lazy" />
+                <div class="des">
+                    <span class="brand">Zara</span>
+                    <h5>Cherry Mist Shirt</h5>
+                    <div class="star">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h4>$90</h4>
+                    <button class="cart add-to-cart" data-id="pro4" data-name="Cherry Mist Shirt" data-price="90"
+                        data-img="pro4.png" data-qty="1" aria-label="Add Cherry Mist Shirt to cart">🛒</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customers also bought (scrollable) -->
+    <section class="reco-section section-p1">
+        <div class="reco-header">
+            <h3 class="reco-title">Customers also bought these products</h3>
+            <div class="reco-controls">
+                <button class="reco-btn" data-dir="prev">‹</button>
+                <button class="reco-btn" data-dir="next">›</button>
+            </div>
+        </div>
+        <div class="reco-row" id="reco-row"></div>
+    </section>
+
+    <!-- Toast for small messages; top-bar is injected by sscript.js when you add -->
+    <div id="toast" aria-live="polite"></div>
+
+    <!-- Scripts (order matters) -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sscript.js" defer></script>
+    <script src="reco.js" defer></script>
+    <!-- keep your existing scripts here -->
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sscript.js" defer></script>
+    <script src="reco.js" defer></script>
+
+    <!-- Make product cards open Product.html with details -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('#product1 .pro');
+            const fileFromSrc = (src) => (src || '').split('/').pop().trim();
+
+            cards.forEach((card) => {
+                const btn = card.querySelector('.add-to-cart');
+                const imgEl = card.querySelector('img');
+
+                const id = btn?.dataset.id || fileFromSrc(imgEl?.getAttribute('src')).replace(/\.\w+$/, '') || 'item';
+                const name = btn?.dataset.name || card.querySelector('h5')?.textContent?.trim() || id;
+                const price = btn?.dataset.price || (card.querySelector('h4')?.textContent || '').replace(/[^\d.]/g, '') || '0';
+                const img = btn?.dataset.img || fileFromSrc(imgEl?.getAttribute('src')) || 'pro1.png';
+
+                const url = new URL('Product.html', location.href);
+                url.searchParams.set('id', id);
+                url.searchParams.set('name', name);
+                url.searchParams.set('price', price);
+                url.searchParams.set('img', img);
+
+                // wrap the whole card in an <a>
+                const link = document.createElement('a');
+                link.href = url.toString();
+                link.className = 'pro-link';
+                link.style.display = 'block';
+                link.style.textDecoration = 'none';
+                link.style.color = 'inherit';
+
+                card.style.cursor = 'pointer';
+                card.replaceWith(link);
+                link.appendChild(card);
+            });
+        });
+    </script>
+    </body>
+
+    </html>
+
+</body>
+
+</html>

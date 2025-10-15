@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoPro | Product</title>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Product-only CSS -->
+    <link rel="stylesheet" href="product.css" />
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <section id="header">
+        <a href="index.html" class="logo">EcoPro</a>
+        <nav>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a href="cart.html" class="cart-link">
+                        <i class="far fa-shopping-bag"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                </li>
+                <li><a href="login.html" target="_blank">Login</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Product Details -->
+    <section id="prodetails" class="section-p1">
+        <!-- Left: gallery -->
+        <div class="single-pro-image">
+            <img src="img/products/pro1.png" onerror="this.onerror=null;this.src='pro1.png';" width="100%" id="MainImg"
+                alt="Product image" />
+
+            <div class="small-img-group">
+                <div class="small-img-col">
+                    <img src="img/products/pro1.png" onerror="this.onerror=null;this.src='pro1.png';" width="100%"
+                        class="small-img" alt="Preview 1" />
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/pro2.png" onerror="this.onerror=null;this.src='pro2.png';" width="100%"
+                        class="small-img" alt="Preview 2" />
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/pro3.png" onerror="this.onerror=null;this.src='pro3.png';" width="100%"
+                        class="small-img" alt="Preview 3" />
+                </div>
+                <div class="small-img-col">
+                    <img src="img/products/pro4.png" onerror="this.onerror=null;this.src='pro4.png';" width="100%"
+                        class="small-img" alt="Preview 4" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: info & actions -->
+        <div class="single-pro-details">
+            <h6><a href="index.html">Home</a> / T-Shirt</h6>
+            <h4 id="productTitle">Men's Fashion T Shirt</h4>
+            <h2 id="productPrice" data-price="139">$139.00</h2>
+
+            <select id="sizeSelect" aria-label="Select Size">
+                <option selected>Select Size</option>
+                <option>Small</option>
+                <option>XL</option>
+                <option>XXL</option>
+                <option>Large</option>
+            </select>
+
+            <input type="number" id="qty" value="1" min="1" />
+
+            <!-- Add To Cart button -->
+            <button id="addToCart" class="normal add-to-cart" data-id="pro1" data-name="Men's Fashion T Shirt"
+                data-price="139" data-img="img/products/pro1.png" data-qty="1">
+                Add To Cart
+            </button>
+
+            <h4>Product Details</h4>
+            <span>
+                The Gildan Ultra Cotton T-shirt is made from a substantial 6.0 oz. fabric
+                constructed from 100% cotton. Classic fit, preshrunk for comfort, with a taped
+                neck and shoulder, and a seamless double-needle collar.
+            </span>
+        </div>
+    </section>
+
+    <!-- Toast (for “Added to cart ✅”) -->
+    <div id="toast" aria-live="polite"></div>
+
+    <!-- Scripts (order matters) -->
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="sscript.js" defer></script>
+
+    <!-- Single hydrator: reads ?id&name&price&img, wires thumbs + qty -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const qs = new URLSearchParams(location.search);
+            const pid = qs.get('id') || 'pro1';
+            const name = qs.get('name') || "Men's Fashion T Shirt";
+            const price = Number(qs.get('price') || 139);
+            const img = qs.get('img') || 'pro1.png';
+
+            const main = document.getElementById('MainImg');
+            const title = document.getElementById('productTitle');
+            const priceEl = document.getElementById('productPrice');
+            const btn = document.getElementById('addToCart');
+            const qtyInp = document.getElementById('qty');
+            const thumbs = document.querySelectorAll('.small-img-group .small-img-col img');
+
+            // Populate UI
+            if (title) title.textContent = name;
+            if (priceEl) { priceEl.dataset.price = String(price); priceEl.textContent = `$${price.toFixed(2)}`; }
+            if (main) { main.src = img; main.alt = name; }
+
+            // Wire Add-to-cart dataset (sscript.js reads these)
+            const applyQty = () => { if (btn) btn.dataset.qty = String(Math.max(1, Number(qtyInp?.value || 1))); };
+            if (btn) {
+                btn.dataset.id = pid;
+                btn.dataset.name = name;
+                btn.dataset.price = String(price);
+                btn.dataset.img = img;
+                applyQty();
+            }
+            qtyInp?.addEventListener('input', applyQty);
+
+            // Thumbnails: mark first active + swap on click
+            function setActive(imgEl) {
+                thumbs.forEach(t => t.classList.remove('active'));
+                imgEl.classList.add('active');
+                if (main) main.src = imgEl.src;
+            }
+            thumbs.forEach((imgEl, i) => {
+                if (i === 0) imgEl.classList.add('active');
+                imgEl.addEventListener('click', () => setActive(imgEl));
+            });
+        });
+    </script>
+</body>
+
+</html>

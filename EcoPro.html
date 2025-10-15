@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+ <title>EcoPro</title>
+
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+ <!-- Custom CSS -->
+ <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+ <!-- Header -->
+ <section id="header">
+ <a href="index.html" class="logo">EcoPro</a>
+ <nav>
+ <ul id="navbar">
+ <li><a class="active" href="index.html">Home</a></li>
+ <li><a href="shop.html">Shop</a></li>
+ <li><a href="cart.html">Cart</a></li>
+ <li><a href="blog.html">Blog</a></li>
+ <li><a href="about.html">About</a></li>
+ <li><a href="contact.html">Contact</a></li>
+ <!-- cart with live badge -->
+ <li>
+ <a href="cart.html" class="cart-link">
+ <i class="far fa-shopping-bag"></i>
+ <span id="cart-count" class="cart-count">0</span>
+ </a>
+ </li>
+ <li><a href="login.html" target="_blank">Login</a></li>
+ </ul>
+ </nav>
+ </section>
+
+ <!-- Hero Section -->
+ <section id="hero">
+ <div class="hero-text">
+ <h4>Trade-in-offer</h4>
+ <h2>Super value deals</h2>
+ <h1>On all products</h1>
+ <p>Save more with coupons &amp; up to 50% off!</p>
+ <button onclick="location.href='shop.html'">Shop Now</button>
+ </div>
+ <div class="hero-img">
+ <img src="hero4.png" alt="Promo Image" />
+ </div>
+ </section>
+
+ <!-- Feature Section -->
+ <section id="Features" class="section-p1">
+ <div class="feature-box">
+ <img src="f1.png" alt="Free Shipping" />
+ <h6>Free Shipping</h6>
+ <p>On all orders over $50</p>
+ </div>
+ <div class="feature-box">
+ <img src="f2.png" alt="Online Order" />
+ <h3>Online Order</h3>
+ </div>
+ <div class="feature-box">
+ <img src="f3.png" alt="Save Money" />
+ <h3>Save Money</h3>
+ </div>
+ <div class="feature-box">
+ <img src="f4.png" alt="Promotions" />
+ <h3>Promotions</h3>
+ </div>
+ <div class="feature-box">
+ <img src="f5.png" alt="24/7 Support" />
+ <h3>24/7 Support</h3>
+ </div>
+
+ <div class="feature-heading">
+ <h2>Featured Products</h2>
+ <p>Summer Collection New Modern Design</p>
+ </div>
+ </section>
+
+ <!-- Product Grid -->
+ <section id="product1" class="section-p1">
+ <h2>Featured Products</h2>
+ <p>Summer Collection New Modern Design</p>
+ <h2>Male Section</h2>
+
+ <div class="pro-container">
+ <!-- Product 1 -->
+ <div class="pro" data-sku="pro1">
+ <img src="pro1.png" alt="Tropical Vibe Shirt" />
+ <div class="des">
+ <span class="brand">adidas</span>
+ <h5 class="product-title">Tropical Vibe Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="far fa-star"></i><i class="far fa-star"></i>
+ </div>
+ <h4 class="price">$78</h4>
+ <button class="cart add-to-cart" data-id="pro1" data-name="Tropical Vibe Shirt" data-price="78"
+ data-img="pro1.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 2 -->
+ <div class="pro" data-sku="pro2">
+ <img src="pro2.png" alt="Palm Whisper Shirt" />
+ <div class="des">
+ <span class="brand">Levi's</span>
+ <h5 class="product-title">Palm Whisper Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="far fa-star"></i><i class="far fa-star"></i>
+ </div>
+ <h4 class="price">$50</h4>
+ <button class="cart add-to-cart" data-id="pro2" data-name="Palm Whisper Shirt" data-price="50"
+ data-img="pro2.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 3 -->
+ <div class="pro" data-sku="pro3">
+ <img src="pro3.png" alt="Rustic Bloom Shirt" />
+ <div class="des">
+ <span class="brand">Lacoste</span>
+ <h5 class="product-title">Rustic Bloom Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+ </div>
+ <h4 class="price">$20</h4>
+ <button class="cart add-to-cart" data-id="pro3" data-name="Rustic Bloom Shirt" data-price="20"
+ data-img="pro3.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 4 -->
+ <div class="pro" data-sku="pro4">
+ <img src="pro4.png" alt="Cherry Mist Shirt" />
+ <div class="des">
+ <span class="brand">Zara</span>
+ <h5 class="product-title">Cherry Mist Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="fas fa-star"></i><i class="far fa-star"></i>
+ </div>
+ <h4 class="price">$90</h4>
+ <button class="cart add-to-cart" data-id="pro4" data-name="Cherry Mist Shirt" data-price="90"
+ data-img="pro4.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+ </div>
+
+ <div class="pro-container">
+ <!-- Product 5 -->
+ <div class="pro" data-sku="pro5">
+ <img src="pro5.png" alt="Urban Contrast Shirt" />
+ <div class="des">
+ <span class="brand">H&amp;M</span>
+ <h5 class="product-title">Urban Contrast Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="fas fa-star"></i><i class="fas fa-star"></i>
+ </div>
+ <h4 class="price">$120</h4>
+ <button class="cart add-to-cart" data-id="pro5" data-name="Urban Contrast Shirt" data-price="120"
+ data-img="pro5.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 6 -->
+ <div class="pro" data-sku="pro6">
+ <img src="pro6.png" alt="Evergreen Henley" />
+ <div class="des">
+ <span class="brand">Zodiac</span>
+ <h5 class="product-title">Evergreen Henley</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="fas fa-star"></i><i class="far fa-star"></i>
+ </div>
+ <h4 class="price">$80</h4>
+ <button class="cart add-to-cart" data-id="pro6" data-name="Evergreen Henley" data-price="80"
+ data-img="pro6.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 7 -->
+ <div class="pro" data-sku="pro7">
+ <img src="pro7.png" alt="Victorious Shirt" />
+ <div class="des">
+ <span class="brand">Hugo Boss</span>
+ <h5 class="product-title">Victorious Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="fas fa-star"></i><i class="fas fa-star"></i>
+ </div>
+ <h4 class="price">$100</h4>
+ <button class="cart add-to-cart" data-id="pro7" data-name="Victorious Shirt" data-price="100"
+ data-img="pro7.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+
+ <!-- Product 8 -->
+ <div class="pro" data-sku="pro8">
+ <img src="pro8.png" alt="Coastal Breeze Shirt" />
+ <div class="des">
+ <span class="brand">Uniqlo</span>
+ <h5 class="product-title">Coastal Breeze Shirt</h5>
+ <div class="star">
+ <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+ <i class="fas fa-star"></i><i class="fas fa-star"></i>
+ </div>
+ <h4 class="price">$110</h4>
+ <button class="cart add-to-cart" data-id="pro8" data-name="Coastal Breeze Shirt" data-price="110"
+ data-img="pro8.png" data-qty="1">🛒</button>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <section id="banner" class="section-m1">
+ <h1>Up to 50% Off - All T-Shirts &amp; Accessories</h1>
+ <button class="normal" onclick="location.href='shop.html'">Explore Now</button>
+ </section>
+
+ <!-- ===== SCRIPTS (order matters) ===== -->
+
+ <!-- your existing site JS -->
+ <script src="script.js"></script>
+
+ <!-- (optional) your product data file if you use it elsewhere -->
+ <script src="product_data.js"></script>
+
+ <!-- toast for messages -->
+ <div id="toast" aria-live="polite"></div>
+
+ <!-- Supabase SDK (safe to include even if you don't set the keys yet) -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+ <!-- cart & API logic (kept separate from script.js) -->
+ <script src="sscript.js" defer></script>
+
+ <!-- (optional) make each card clickable to product page if you use product_data.js -->
+ <script>
+ document.addEventListener('DOMContentLoaded', function () {
+ const cards = document.querySelectorAll('#product1 .pro');
+ if (!cards.length) return;
+
+ const fileFromSrc = (src) => (src || '').split('/').pop().trim().toLowerCase();
+
+ cards.forEach((card) => {
+ const img = card.querySelector('img');
+ if (!img) return;
+
+ const file = fileFromSrc(img.getAttribute('src')); // 'pro1.png'
+ const sku = file.replace(/\.\w+$/, ''); // 'pro1'
+
+ const product = (window.PRODUCTS || []).find(p =>
+ (p.img && p.img.toLowerCase() === file) ||
+ (p.sku && p.sku.toLowerCase() === sku)
+ );
+ if (!product) return;
+
+ if (card.parentElement && card.parentElement.matches('a.pro-link')) return;
+
+ const link = document.createElement('a');
+ link.href = 'product.html?id=' + product.id;
+ link.className = 'pro-link';
+ link.style.display = 'block';
+ link.style.textDecoration = 'none';
+ link.style.color = 'inherit';
+
+ card.style.cursor = 'pointer';
+ card.replaceWith(link);
+ link.appendChild(card);
+ });
+ });
+ </script>
+</body>
+
+</html>

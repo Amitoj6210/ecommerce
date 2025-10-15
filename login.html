@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #login .login-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+            text-align: center;
+            width: 340px;
+        }
+
+        h2 {
+            margin: 0 0 16px;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            margin: 0 0 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 8px;
+            padding: 10px 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .email-btn {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .email-btn:hover {
+            background: #0056b3;
+        }
+
+        .github-btn {
+            background: #24292e;
+            color: #fff;
+        }
+
+        .github-btn:hover {
+            background: #444c56;
+        }
+
+        .btn-green {
+            background: #16a34a;
+            color: #fff;
+        }
+
+        .btn-gray {
+            background: #6b7280;
+            color: #fff;
+        }
+
+        hr {
+            margin: 16px 0;
+            border: 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .msg {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .msg.error {
+            color: #b91c1c;
+        }
+
+        .msg.ok {
+            color: #16a34a;
+        }
+    </style>
+
+    <!-- Firebase SDKs (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+    <section id="login">
+        <div class="login-box">
+            <h2>Login</h2>
+
+            <form id="email-login-form">
+                <input type="email" id="email" placeholder="Email" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <button type="submit" class="email-btn">Login with Email</button>
+            </form>
+
+            <button type="button" id="signup" class="btn-green">Create account</button>
+            <button type="button" id="forgot" class="btn-gray">Forgot password</button>
+
+            <hr />
+
+            <button type="button" class="github-btn" id="github-login">Login with GitHub</button>
+            <div id="status" class="msg" aria-live="polite"></div>
+        </div>
+    </section>
+
+    <script>
+        // ---------- 1) Firebase init (Compat) ----------
+        const firebaseConfig = {
+            apiKey: "AIzaSyABuDOAzFf2vcLUkIBJTg6kX0rCmdiqcsQ",
+            authDomain: "ecoprologin-d9c45.firebaseapp.com",
+            projectId: "ecoprologin-d9c45",
+            storageBucket: "ecoprologin-d9c45.appspot.com",
+            messagingSenderId: "451250171247",
+            appId: "1:451250171247:web:be31db61a000f853088c9a",
+            measurementId: "G-8XX38K5T71"
+        };
+        if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(console.error);
+
+        // ---------- 2) Helpers ----------
+        const $ = s => document.querySelector(s);
+        const say = (txt, cls = '') => { const el = $('#status'); el.textContent = txt; el.className = `msg ${cls}`; };
+        const goHome = () => location.assign('/'); // "/" serves your index.html
+        const logError = (where, err) => {
+            console.log(`[AUTH ERROR @ ${where}]`, err?.code, err?.message, err);
+            say(`${err?.code || 'Error'}: ${err?.message || 'Something went wrong.'}`, 'error');
+        };
+
+        // ---------- 3) Email/password login ----------
+        $('#email-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            say('Signing in…');
+            const email = $('#email').value.trim();
+            const password = $('#password').value;
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                say('Success. Redirecting…', 'ok');
+                goHome();
+            } catch (err) {
+                // friendlier guidance for wrong creds
+                if (err?.code === 'auth/invalid-login-credentials' || err?.code === 'auth/wrong-password') {
+                    try {
+                        const methods = await auth.fetchSignInMethodsForEmail(email);
+                        if (!methods || methods.length === 0) {
+                            say('No account for this email. Use “Create account”.', 'error');
+                        } else {
+                            say('Wrong password. Use “Forgot password”.', 'error');
+                        }
+                    } catch { logError('email/password', err); }
+                } else {
+                    logError('email/password', err);
+                }
+            }
+        });
+
+        // ---------- 4) Create account ----------
+        $('#signup').addEventListener('click', async () => {
+            const email = $('#email').value.trim();
+            const password = $('#password').value;
+            if (!email || password.length < 6) {
+                say('Enter email and a 6+ character password.', 'error'); return;
+            }
+            say('Creating account…');
+            try {
+                await auth.createUserWithEmailAndPassword(email, password);
+                say('Account created. Redirecting…', 'ok');
+                goHome();
+            } catch (err) { logError('signup', err); }
+        });
+
+        // ---------- 5) Forgot password ----------
+        $('#forgot').addEventListener('click', async () => {
+            const email = $('#email').value.trim();
+            if (!email) { say('Enter your email above first.', 'error'); return; }
+            say('Sending reset email…');
+            try {
+                await auth.sendPasswordResetEmail(email);
+                say('Password reset email sent. Check your inbox.', 'ok');
+            } catch (err) { logError('forgot', err); }
+        });
+
+        // ---------- 6) GitHub (popup + redirect fallback) ----------
+        const githubProvider = new firebase.auth.GithubAuthProvider();
+        $('#github-login').addEventListener('click', async () => {
+            say('Opening GitHub…');
+            try {
+                await auth.signInWithPopup(githubProvider);
+                say('Success. Redirecting…', 'ok');
+                goHome();
+            } catch (err) {
+                if (err?.code === 'auth/popup-blocked') {
+                    say('Popup blocked. Using redirect…');
+                    await auth.signInWithRedirect(githubProvider);
+                    return;
+                }
+                logError('github/popup', err);
+            }
+        });
+
+        // ---------- 7) Redirect flow (Safari/mobile) ----------
+        auth.getRedirectResult()
+            .then((r) => { if (r?.user) { say('Success. Redirecting…', 'ok'); goHome(); } })
+            .catch((err) => logError('github/redirect', err));
+    </script>
+</body>
+
+</html>
